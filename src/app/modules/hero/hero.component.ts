@@ -32,9 +32,34 @@ export class HeroComponent implements AfterViewInit {
     }
   }
   ngAfterViewInit(): void {
-    this.startVideos();
+    const main = this.videoElement.nativeElement;
+    const bg = this.bgVideoElement.nativeElement;
+
+    main.muted = true;
+    bg.muted = true;
+
+    main.load();
+    bg.load();
+
+    this.playVideos();
+  }
+  playVideos() {
+    const main = this.videoElement.nativeElement;
+    const bg = this.bgVideoElement.nativeElement;
+
+    Promise.all([
+      main.play(),
+      bg.play()
+    ]).catch(() => { });
   }
 
+  pauseVideos() {
+    const main = this.videoElement.nativeElement;
+    const bg = this.bgVideoElement.nativeElement;
+
+    main.pause();
+    bg.pause();
+  }
   startVideos() {
     const mainVideo = this.videoElement.nativeElement;
     const bgVideo = this.bgVideoElement.nativeElement;
