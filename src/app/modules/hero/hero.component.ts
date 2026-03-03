@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-hero',
@@ -8,9 +8,9 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.scss'
 })
-export class HeroComponent {
-  @ViewChild('videoElement') videoElement!: ElementRef;
-  @ViewChild('bgVideoElement') bgVideoElement!: ElementRef;
+export class HeroComponent implements AfterViewInit {
+  @ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
+  @ViewChild('bgVideoElement') bgVideoElement!: ElementRef<HTMLVideoElement>;
   isPlayButton: boolean = false;  // Initially show the play button
   isPauseButton: boolean = true;
 
@@ -30,5 +30,22 @@ export class HeroComponent {
       this.isPlayButton = true;   // Show play button
       this.isPauseButton = false; // Hide pause button
     }
+  }
+  ngAfterViewInit(): void {
+    this.startVideos();
+  }
+
+  startVideos() {
+    const mainVideo = this.videoElement.nativeElement;
+    const bgVideo = this.bgVideoElement.nativeElement;
+
+    mainVideo.muted = true;
+    bgVideo.muted = true;
+
+    mainVideo.load();
+    bgVideo.load();
+
+    mainVideo.play().catch(() => { });
+    bgVideo.play().catch(() => { });
   }
 }
