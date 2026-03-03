@@ -1,18 +1,33 @@
 <div class="container-fluid">
   <div class="video-background">
-    <video #bgVideoElement class="background-video" autoplay muted loop>
+    <video
+      #bgVideoElement
+      class="background-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    >
       <source
-        src="../../../assets/videos/netflix-landing-page-video.mp4"
+        src="assets/videos/netflix-landing-page-video.mp4"
         type="video/mp4"
       />
-      Your browser does not support the video tag.
     </video>
     <div class="gradient-overlay"></div>
     <div class="red-overlay"></div>
   </div>
   <div class="hero-video">
     <div class="content-container">
-      <video #videoElement autoplay muted loop playsinline class="main-video">
+      <video
+        #videoElement
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        class="main-video"
+      >
         <source
           src="assets/videos/netflix-landing-page-video.mp4"
           type="video/mp4"
